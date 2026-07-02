@@ -157,20 +157,24 @@ watchDebounced([sortBy, timeBy, searchQuery], async () => {
           </div>
         </div>
         <div ref="element" class="row g-4">
-          <div v-for="clip in computedClips" :key="clip.id" class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" :title="clip?.title?.trim() || ''">
+          <div v-for="clip in computedClips" :key="clip.id" class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3"
+            :title="clip?.title?.trim() || ''">
             <NuxtLink :to="`/?channel=${clip.channel.slug}&id=${clip.id}`" class="text-decoration-none text-white">
               <div class="card bg-dark text-white rounded-1 overflow-hidden">
                 <div class="position-relative">
                   <img :src="clip.thumbnail_url" class="w-100">
-                  <span class="badge bg-black position-absolute top-0 start-0 m-2 opacity-75">{{ formatTime(clip.duration) }}</span>
+                  <span class="badge bg-black position-absolute top-0 start-0 m-2 opacity-75">{{
+                    formatTime(clip.duration) }}</span>
                   <span class="badge bg-black position-absolute bottom-0 start-0 m-2 opacity-75">
                     {{ formatViews(clip.view_count) }} views
                   </span>
                 </div>
                 <div class="card-body text-start d-flex flex-column gap-1 p-2">
                   <h6 class="card-title m-0 fw-bold text-truncate">{{ clip?.title?.trim() || "" }}</h6>
-                  <small class="d-block card-text text-muted text-truncate">{{ clip?.category?.name?.trim() || "" }}</small>
-                  <small class="d-block card-text text-muted text-truncate" :title="new Date(clip.created_at).toLocaleString()">{{ useTimeAgo(clip.created_at) }}</small>
+                  <small class="d-block card-text text-muted text-truncate">{{ clip?.category?.name?.trim() || ""
+                  }}</small>
+                  <small class="d-block card-text text-muted text-truncate"
+                    :title="new Date(clip.created_at).toLocaleString()">{{ useTimeAgo(clip.created_at) }}</small>
                   <small class="d-flex card-text text-muted justify-content-start align-items-center gap-1">
                     <Icon name="ph:user-bold" />
                     <span class="text-truncate">{{ clip?.creator?.username?.trim() || "" }}</span>
