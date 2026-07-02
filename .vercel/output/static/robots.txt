@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://kickclips.ahmedrangel.com/sitemap.xml
