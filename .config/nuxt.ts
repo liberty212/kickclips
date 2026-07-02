@@ -53,19 +53,12 @@ export default defineNuxtConfig({
   },
   nitro: {
   preset: 'vercel',
-  // @ts-expect-error - bundle option exists
-  bundle: {
-    external: false   // bundle all dependencies
-  },
-  // @ts-expect-error - valid option
   externals: {
-    // Force these packages to be inlined (just in case)
+    // Force all Vue packages and entities to be bundled
     inline: [
       'entities',
       'vue',
-      '@vue/compiler-dom',
-      '@vue/runtime-core',
-      '@vue/runtime-dom'
+      /^@vue\/.*/   // inlines every package starting with @vue/
     ]
   }
 },
