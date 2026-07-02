@@ -125,7 +125,7 @@ watchDebounced([sortBy, timeBy, searchQuery], async () => {
         <SearchChannelInput :align="'end'" class="mb-4" />
         <div class="mb-4">
           <NuxtLink to="/">
-            <img class="logo" src="/images/kickclips-logo.svg">
+            <img class="logo" src="/kickclips-logo.png">
           </NuxtLink>
         </div>
         <div class="d-flex justify-content-center align-items-center mb-2">
