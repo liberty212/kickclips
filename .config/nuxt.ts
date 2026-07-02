@@ -57,16 +57,8 @@ export default defineNuxtConfig({
   bundle: {
     external: false
   },
-  externals: {
-    inline: [
-      'vue',
-      '@vue/compiler-dom',
-      '@vue/runtime-core',
-      '@vue/runtime-dom',
-      '@vue/shared',
-      '@vue/reactivity'
-    ]
-  }
+  // @ts-expect-error - inline works alongside bundle
+  inline: ['entities']   // force this package to be inlined
 },
   sitemap: {
     urls: [

@@ -11,6 +11,9 @@
     "@vue/compiler-core": "3.5.39",
     "@vue/compiler-dom": "3.5.39",
     "@vue/compiler-ssr": "3.5.39",
+    "@vue/devtools-api": "8.1.5",
+    "@vue/devtools-kit": "8.1.5",
+    "@vue/devtools-shared": "8.1.5",
     "@vue/reactivity": "3.5.39",
     "@vue/runtime-core": "3.5.39",
     "@vue/runtime-dom": "3.5.39",
@@ -19,6 +22,7 @@
     "@vueuse/core": "14.3.0",
     "@vueuse/shared": "14.3.0",
     "anynum": "1.0.1",
+    "birpc": "2.9.0",
     "consola": "3.4.2",
     "devalue": "5.8.1",
     "entities": "7.0.1",
@@ -31,9 +35,12 @@
     "perfect-debounce": "2.1.0",
     "source-map-js": "1.2.1",
     "strnum": "2.4.1",
+    "ufo": "1.6.4",
     "ultrahtml": "1.6.0",
     "unhead": "2.1.15",
     "vue": "3.5.39",
+    "vue-bundle-renderer": "2.3.1",
+    "vue-router": "5.1.0",
     "xml-naming": "0.1.0"
   }
 }
