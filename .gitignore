@@ -26,3 +26,4 @@ logs
 
 *.bat
 .data.vercel
+.vercel
