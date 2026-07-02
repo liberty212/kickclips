@@ -52,8 +52,15 @@ export default defineNuxtConfig({
     url: SITE.url
   },
   nitro: {
-    preset: 'vercel'
+  preset: 'vercel',
+  // @ts-expect-error
+  bundle: {
+    external: false
   },
+  externals: {
+    inline: ['vue']   // explicitly bundle vue
+  }
+},
   sitemap: {
     urls: [
       { loc: "/", priority: 1, lastmod: new Date().toISOString() }
