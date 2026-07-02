@@ -38,9 +38,9 @@ const queryParams = query as { channel?: string, id: string };
     <div id="home" class="text-center container overflow-hidden">
       <div class="my-5">
         <SearchChannelInput :align="'end'" class="mb-4" />
-        <img class="logo mb-4" src="/images/kickclips-logo.svg">
-        <h3 class="mb-4">Kick Clips Downloader</h3>
-        <h5 class="mb-4 fw-light">This is a free online tool for downloading MP4 clips from kick.com.</h5>
+        <img class="mb-4" src="/images/kickclips-logo.png" style="width: 350px;">
+        <h3 class="mb-4" style="color: #10b981 !important;">Ultimate Kick Clip Tool</h3>
+        <h5 class="mb-4 text-emerald-600">Download Free HD Clips From kick.com.</h5>
         <DownloadClip :channel="queryParams.channel" :clip-id="queryParams.id" />
         <DownloadGuide />
       </div>

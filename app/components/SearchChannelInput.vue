@@ -37,7 +37,7 @@ watchDebounced(channel, async () => {
     <div class="d-flex justify-content-center" :class="`justify-content-md-${align || 'center'}`">
       <div class="d-flex position-relative">
         <input id="search" v-model="channel" class="form-control search-input" type="text" placeholder="Search channel clips" style="max-width: 200px;" autocomplete="off">
-        <button v-ripple type="submit" class="btn d-flex align-items-center justify-content-center text-dark fw-bold" style="background-color: var(--app-bg-color); color: var(--app-text-color);">
+        <button id="download" v-ripple type="submit" class="col-3 col-lg-2 col-sm-4 btn fw-bold d-flex align-items-center justify-content-center" style="background-color: #10b981 !important; border-color: #10b981 !important; color: white !important;">
           <Icon name="ph:magnifying-glass-bold" size="1.2em" />
         </button>
         <div v-if="channelResults.length || searching" class="position-absolute border border-secondary rounded-1 overflow-hidden w-100" style="top: 45px;">
