@@ -25,4 +25,4 @@ logs
 .vscode
 
 *.bat
-.data
+.data.vercel

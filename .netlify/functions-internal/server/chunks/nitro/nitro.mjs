@@ -4362,7 +4362,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "8567b839-6555-4037-939b-140dc4165759",
+    "buildId": "34135b36-27d6-4a47-8e36-4934b63540b2",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4370,8 +4370,7 @@ const _inlineRuntimeConfig = {
     "envPrefix": "NUXT_",
     "routeRules": {
       "/__nuxt_error": {
-        "cache": false,
-        "isr": false
+        "cache": false
       },
       "/**": {
         "headers": {
@@ -4456,7 +4455,7 @@ const _inlineRuntimeConfig = {
         "route": "sitemap.xml",
         "defaults": {
           "priority": 0.8,
-          "lastmod": "2026-07-02T22:31:34.882Z"
+          "lastmod": "2026-07-02T22:20:31.105Z"
         },
         "include": [],
         "exclude": [
@@ -7723,37 +7722,51 @@ function useNitroApp() {
 }
 runNitroPlugins(nitroApp$1);
 
-const ISR_URL_PARAM = "__isr_route";
-
 const nitroApp = useNitroApp();
-const handler = toNodeListener(nitroApp.h3App);
-const listener = function(req, res) {
-  const isrRoute = req.headers["x-now-route-matches"];
-  if (isrRoute) {
-    const { [ISR_URL_PARAM]: url } = parseQuery(isrRoute);
-    if (url && typeof url === "string") {
-      const routeRules = getRouteRulesForPath(url);
-      if (routeRules.isr) {
-        req.url = url;
+const handler = async (req) => {
+  const url = new URL(req.url);
+  const relativeUrl = `${url.pathname}${url.search}`;
+  const r = await nitroApp.localCall({
+    url: relativeUrl,
+    headers: req.headers,
+    method: req.method,
+    body: req.body
+  });
+  const headers = normalizeResponseHeaders({
+    ...getCacheHeaders(url.pathname),
+    ...r.headers
+  });
+  return new Response(r.body, {
+    status: r.status,
+    headers
+  });
+};
+const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
+function normalizeResponseHeaders(headers) {
+  const outgoingHeaders = new Headers();
+  for (const [name, header] of Object.entries(headers)) {
+    if (name === "set-cookie") {
+      for (const cookie of normalizeCookieHeader(header)) {
+        outgoingHeaders.append("set-cookie", cookie);
       }
-    }
-  } else {
-    const queryIndex = req.url.indexOf("?");
-    const urlQueryIndex = queryIndex === -1 ? -1 : req.url.indexOf(`${ISR_URL_PARAM}=`, queryIndex);
-    if (urlQueryIndex !== -1) {
-      const { [ISR_URL_PARAM]: url, ...params } = parseQuery(
-        req.url.slice(queryIndex)
-      );
-      if (url && typeof url === "string") {
-        const routeRules = getRouteRulesForPath(url);
-        if (routeRules.isr) {
-          req.url = withQuery(url, params);
-        }
-      }
+    } else if (header !== void 0) {
+      outgoingHeaders.set(name, joinHeaders(header));
     }
   }
-  return handler(req, res);
-};
+  return outgoingHeaders;
+}
+function getCacheHeaders(url) {
+  const { isr } = getRouteRulesForPath(url);
+  if (isr) {
+    const maxAge = typeof isr === "number" ? isr : ONE_YEAR_IN_SECONDS;
+    const revalidateDirective = typeof isr === "number" ? `stale-while-revalidate=${ONE_YEAR_IN_SECONDS}` : "must-revalidate";
+    return {
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "Netlify-CDN-Cache-Control": `public, max-age=${maxAge}, ${revalidateDirective}, durable`
+    };
+  }
+  return {};
+}
 
-export { $fetch$1 as $, defuFn as A, getContext as B, isScriptProtocol as C, withQuery as D, withTrailingSlash as E, withoutTrailingSlash as F, sanitizeStatusCode as G, baseURL as H, executeAsync as I, defu as J, SEO as K, listener as L, RESOURCES as R, SITE as S, getQuery as a, readBody as b, buildAssetsURL as c, defineEventHandler as d, useStorage as e, getResponseStatusText as f, getRouterParams as g, getResponseStatus as h, encodePath as i, defineRenderHandler as j, createError$1 as k, destr as l, getRouteRules as m, joinURL as n, useNitroApp as o, publicAssetsURL as p, parseQuery as q, readFormData as r, klona as s, hash$1 as t, useRuntimeConfig as u, vueExports as v, withLeadingSlash as w, hasProtocol as x, parseURL as y, decodePath as z };
+export { $fetch$1 as $, defuFn as A, getContext as B, isScriptProtocol as C, withQuery as D, withTrailingSlash as E, withoutTrailingSlash as F, sanitizeStatusCode as G, baseURL as H, executeAsync as I, defu as J, SEO as K, handler as L, RESOURCES as R, SITE as S, getQuery as a, readBody as b, buildAssetsURL as c, defineEventHandler as d, useStorage as e, getResponseStatusText as f, getRouterParams as g, getResponseStatus as h, encodePath as i, defineRenderHandler as j, createError$1 as k, destr as l, getRouteRules as m, joinURL as n, useNitroApp as o, publicAssetsURL as p, parseQuery as q, readFormData as r, klona as s, hash$1 as t, useRuntimeConfig as u, vueExports as v, withLeadingSlash as w, hasProtocol as x, parseURL as y, decodePath as z };
 //# sourceMappingURL=nitro.mjs.map
