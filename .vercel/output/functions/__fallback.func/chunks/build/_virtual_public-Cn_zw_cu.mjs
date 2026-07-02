@@ -1,6 +1,7 @@
 import { e as __nuxt_component_0$1, _ as __nuxt_component_1$1, g as useNuxtApp } from './server.mjs';
+import { defineComponent, ref, watch, resolveDirective, unref, mergeProps, withCtx, createVNode, toDisplayString, openBlock, createBlock, createCommentVNode, useSSRContext } from 'vue';
 import { watchDebounced } from '@vueuse/core';
-import { p as publicAssetsURL, v as vueExports } from '../nitro/nitro.mjs';
+import { p as publicAssetsURL } from '../nitro/nitro.mjs';
 import { ssrRenderAttrs, ssrRenderClass, ssrRenderAttr, ssrRenderStyle, ssrGetDirectiveProps, ssrRenderComponent, ssrRenderList, ssrInterpolate } from '@vue/server-renderer';
 
 const formatTime = (durationSeconds) => {
@@ -107,18 +108,18 @@ const searchChannel = async (text) => {
     ...hit?.document
   })) || [];
 };
-const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
+const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   __name: "SearchChannelInput",
   __ssrInlineRender: true,
   props: {
     align: {}
   },
   setup(__props) {
-    const channel = vueExports.ref("");
-    const channelResults = vueExports.ref([]);
-    const searching = vueExports.ref(false);
-    const loading = vueExports.ref(false);
-    vueExports.watch(channel, () => {
+    const channel = ref("");
+    const channelResults = ref([]);
+    const searching = ref(false);
+    const loading = ref(false);
+    watch(channel, () => {
       searching.value = true;
     });
     watchDebounced(channel, async () => {
@@ -136,8 +137,8 @@ const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_Icon = __nuxt_component_0$1;
       const _component_NuxtLink = __nuxt_component_1$1;
-      const _directive_ripple = vueExports.resolveDirective("ripple");
-      _push(`<form${ssrRenderAttrs(_attrs)}><div class="${ssrRenderClass([`justify-content-md-${__props.align || "center"}`, "d-flex justify-content-center"])}"><div class="d-flex position-relative"><input id="search"${ssrRenderAttr("value", vueExports.unref(channel))} class="form-control search-input" type="text" placeholder="Search channel clips" style="${ssrRenderStyle({ "max-width": "200px" })}" autocomplete="off"><button${ssrRenderAttrs(vueExports.mergeProps({
+      const _directive_ripple = resolveDirective("ripple");
+      _push(`<form${ssrRenderAttrs(_attrs)}><div class="${ssrRenderClass([`justify-content-md-${__props.align || "center"}`, "d-flex justify-content-center"])}"><div class="d-flex position-relative"><input id="search"${ssrRenderAttr("value", unref(channel))} class="form-control search-input" type="text" placeholder="Search channel clips" style="${ssrRenderStyle({ "max-width": "200px" })}" autocomplete="off"><button${ssrRenderAttrs(mergeProps({
         id: "download",
         type: "submit",
         class: "col-3 col-lg-2 col-sm-4 btn fw-bold d-flex align-items-center justify-content-center",
@@ -148,9 +149,9 @@ const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
         size: "1.2em"
       }, null, _parent));
       _push(`</button>`);
-      if (vueExports.unref(channelResults).length || vueExports.unref(searching)) {
+      if (unref(channelResults).length || unref(searching)) {
         _push(`<div class="position-absolute border border-secondary rounded-1 overflow-hidden w-100" style="${ssrRenderStyle({ "top": "45px" })}"><ul class="list-group w-100 bg-dark">`);
-        if (vueExports.unref(searching)) {
+        if (unref(searching)) {
           _push(ssrRenderComponent(_component_Icon, {
             name: "eos-icons:loading",
             class: "m-2 align-self-center",
@@ -160,13 +161,13 @@ const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
           _push(`<!---->`);
         }
         _push(`<!--[-->`);
-        ssrRenderList(vueExports.unref(channelResults), (result) => {
+        ssrRenderList(unref(channelResults), (result) => {
           _push(ssrRenderComponent(_component_NuxtLink, {
             key: result.slug,
             to: `/${result.slug}`,
             class: "text-decoration-none"
           }, {
-            default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
+            default: withCtx((_, _push2, _parent2, _scopeId) => {
               if (_push2) {
                 _push2(`<li class="list-group-item list-group-item-action list-group-item-dark d-flex align-items-center gap-2"${_scopeId}><span${_scopeId}>${ssrInterpolate(result.username || result.slug)}</span>`);
                 if (result.verified) {
@@ -180,13 +181,13 @@ const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
                 _push2(`</li>`);
               } else {
                 return [
-                  vueExports.createVNode("li", { class: "list-group-item list-group-item-action list-group-item-dark d-flex align-items-center gap-2" }, [
-                    vueExports.createVNode("span", null, vueExports.toDisplayString(result.username || result.slug), 1),
-                    result.verified ? (vueExports.openBlock(), vueExports.createBlock(_component_Icon, {
+                  createVNode("li", { class: "list-group-item list-group-item-action list-group-item-dark d-flex align-items-center gap-2" }, [
+                    createVNode("span", null, toDisplayString(result.username || result.slug), 1),
+                    result.verified ? (openBlock(), createBlock(_component_Icon, {
                       key: 0,
                       name: "ph:check-circle-fill",
                       class: "text-primary"
-                    })) : vueExports.createCommentVNode("", true)
+                    })) : createCommentVNode("", true)
                   ])
                 ];
               }
@@ -204,12 +205,12 @@ const _sfc_main$1 = /* @__PURE__ */ vueExports.defineComponent({
 });
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
-  const ssrContext = vueExports.useSSRContext();
+  const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/SearchChannelInput.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$1, { __name: "SearchChannelInput" });
-const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
+const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "LoadingSpinner",
   __ssrInlineRender: true,
   props: {
@@ -217,13 +218,13 @@ const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      _push(`<div${ssrRenderAttrs(vueExports.mergeProps({ class: "d-flex justify-content-center align-items-center" }, _attrs))}><div class="spinner-border spinner-lg" role="status"><span class="visually-hidden">Loading...</span></div><span class="ms-2">${ssrInterpolate(__props.text || "Processing...")}</span></div>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "d-flex justify-content-center align-items-center" }, _attrs))}><div class="spinner-border spinner-lg" role="status"><span class="visually-hidden">Loading...</span></div><span class="ms-2">${ssrInterpolate(__props.text || "Processing...")}</span></div>`);
     };
   }
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = vueExports.useSSRContext();
+  const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/LoadingSpinner.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };

@@ -54,12 +54,8 @@ export default defineNuxtConfig({
   nitro: {
   preset: 'vercel',
   externals: {
-    // Force all Vue packages and entities to be bundled
-    inline: [
-      'entities',
-      'vue',
-      /^@vue\/.*/   // inlines every package starting with @vue/
-    ]
+    // Inline every package – no external dependencies left
+    inline: [ /.*/ ]
   }
 },
   sitemap: {
