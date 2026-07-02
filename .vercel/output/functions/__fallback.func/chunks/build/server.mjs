@@ -1,6 +1,5 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { v as vueExports, k as createError$1, q as parseQuery$1, s as klona, t as hash, x as hasProtocol, n as joinURL, y as parseURL$1, i as encodePath$1, z as decodePath, A as defuFn, B as getContext, C as isScriptProtocol, D as withQuery, E as withTrailingSlash, F as withoutTrailingSlash, G as sanitizeStatusCode, $ as $fetch$1, H as baseURL, I as executeAsync, J as defu } from '../nitro/nitro.mjs';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { v as vueExports, k as createError$1, s as parseQuery$1, t as klona, x as hash, y as hasProtocol, n as joinURL, z as parseURL$1, i as encodePath$1, A as decodePath, B as defuFn, C as getContext, D as isScriptProtocol, E as withQuery, F as withTrailingSlash, G as withoutTrailingSlash, H as sanitizeStatusCode, $ as $fetch$1, I as baseURL, J as isPlainObject_1, K as executeAsync, L as defu } from '../nitro/nitro.mjs';
 import { debounce } from 'perfect-debounce';
-import { isPlainObject } from '@vue/shared';
 import { Icon, getIcon, loadIcon as loadIcon$1, addIcon, _api, addAPIProvider, setCustomIconsLoader } from '@iconify/vue';
 import { getIconCSS } from '@iconify/utils/lib/css/icon';
 import { u as useSeoMeta$1, a as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
@@ -12,8 +11,9 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
-import '@vue/compiler-dom';
-import '@vue/runtime-dom';
+import 'entities/decode';
+import 'estree-walker';
+import 'source-map-js';
 import '@iconify/utils';
 import 'consola';
 import 'fast-xml-parser';
@@ -3206,7 +3206,7 @@ function generateOptionSegments(opts) {
         entries.push([key, val instanceof File ? `${val.name}:${val.size}:${val.lastModified}` : val]);
       }
       segments.push(hash(entries));
-    } else if (isPlainObject(value)) {
+    } else if (isPlainObject_1(value)) {
       segments.push(hash(vueExports.reactive(value)));
     } else {
       try {

@@ -58,7 +58,14 @@ export default defineNuxtConfig({
     external: false
   },
   externals: {
-    inline: ['vue']   // explicitly bundle vue
+    inline: [
+      'vue',
+      '@vue/compiler-dom',
+      '@vue/runtime-core',
+      '@vue/runtime-dom',
+      '@vue/shared',
+      '@vue/reactivity'
+    ]
   }
 },
   sitemap: {
