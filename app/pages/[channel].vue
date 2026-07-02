@@ -130,7 +130,7 @@ watchDebounced([sortBy, timeBy, searchQuery], async () => {
         </div>
         <div class="d-flex justify-content-center align-items-center mb-2">
           <NuxtLink :to="`https://kick.com/${channel}`" target="_blank" external>
-            <img :⁠src="userimage || '/user-default-pic.png'" class="rounded-circle" width="60" height="60">
+            <img :src="userimage || '/user-default-pic.png'" class="rounded-circle" width="60" height="60">
           </NuxtLink>
         </div>
         <h3 class="mb-4">{{ username || channel }} Clips</h3>
