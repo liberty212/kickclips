@@ -9,6 +9,7 @@ import 'node:crypto';
 import 'vue';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
 const clips = defineEventHandler(async (event) => {
   const { slug } = getRouterParams(event);

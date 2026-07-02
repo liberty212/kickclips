@@ -9,6 +9,7 @@ import 'node:crypto';
 import 'vue';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
 const index_post = defineEventHandler(async (event) => {
   const { url } = await readBody(event);

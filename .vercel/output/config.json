@@ -60,7 +60,7 @@
       "handle": "filesystem"
     },
     {
-      "src": "(?<url>/__nuxt_error)",
+      "src": "(?<__isr_route>/__nuxt_error)",
       "dest": "/__fallback"
     },
     {

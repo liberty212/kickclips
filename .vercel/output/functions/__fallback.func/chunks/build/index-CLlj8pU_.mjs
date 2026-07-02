@@ -1,13 +1,14 @@
-import { _ as __nuxt_component_0, a as _imports_0$1, b as __nuxt_component_3, f as formatTime, g as getDate, p as processClip } from './virtual_public-DdRKDafC.mjs';
-import { u as useSeoMeta, b as useHead, c as useRoute, a as _export_sfc, _ as __nuxt_component_2$1 } from './server.mjs';
+import { _ as __nuxt_component_0, a as _imports_0$1, c as __nuxt_component_1$1, f as formatTime, g as getDate, p as processClip } from './_virtual_public-C4Ylx_gc.mjs';
+import { b as useSeoMeta, d as useHead, u as useRoute, f as _export_sfc, e as __nuxt_component_0$1 } from './server.mjs';
 import { defineComponent, mergeProps, unref, ref, resolveDirective, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrRenderStyle, ssrGetDirectiveProps, ssrInterpolate } from 'vue/server-renderer';
-import { G as SEO, S as SITE, p as publicAssetsURL, R as RESOURCES } from '../nitro/nitro.mjs';
+import { I as SEO, S as SITE, R as RESOURCES, p as publicAssetsURL } from '../nitro/nitro.mjs';
 import '@vueuse/core';
 import 'vue-router';
+import 'perfect-debounce';
+import '@vue/shared';
 import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
-import 'perfect-debounce';
 import '../routes/renderer.mjs';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
@@ -23,6 +24,7 @@ import 'node:path';
 import 'node:crypto';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   __name: "DownloadClip",
@@ -100,8 +102,8 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     };
     if (props.channel && props.clipId) getClip();
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Icon = __nuxt_component_2$1;
-      const _component_LoadingSpinner = __nuxt_component_3;
+      const _component_Icon = __nuxt_component_0$1;
+      const _component_LoadingSpinner = __nuxt_component_1$1;
       const _directive_ripple = resolveDirective("ripple");
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "downloader-body justify-content-center mb-5 p-3 p-sm-4" }, _attrs))}><form><h2 class="col-12 fw-normal title mb-3 mb-sm-4">Enter clip URL</h2><div class="col-12 row input-body p-2 mb-3 mb-sm-4 mx-0 flex-nowrap"><input id="input"${ssrRenderAttr("value", unref(url))} class="col-9 col-lg-10 col-sm-8" type="url" placeholder="https://kick.com/user/clips/clip_01A2BCD3EF4GHI5JKMNLOP67QR" required><button${ssrRenderAttrs(mergeProps({
         id: "download",
@@ -147,7 +149,7 @@ const __nuxt_component_1 = Object.assign(_sfc_main$2, { __name: "DownloadClip" }
 const _imports_0 = publicAssetsURL("/images/example.png");
 const _sfc_main$1 = {};
 function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_Icon = __nuxt_component_2$1;
+  const _component_Icon = __nuxt_component_0$1;
   _push(`<div${ssrRenderAttrs(mergeProps({ class: "guide-body mx-1" }, _attrs))}><h3 class="mb-4">How to download a Kick clip?</h3><div class="row g-4"><div class="col-12 col-lg-4"><div class="guide p-4" style="${ssrRenderStyle({ "background-color": "#065f46 !important" })}"><h1>`);
   _push(ssrRenderComponent(_component_Icon, { name: "ph:film-slate-duotone" }, null, _parent));
   _push(`</h1><h5>Step 1: Get clip URL</h5><h5 class="fw-light mb-3">On the Kick.com website, search for the clip you wish to download, press the share button, and then copy the clip&#39;s URL.</h5><img class="img-fluid"${ssrRenderAttr("src", _imports_0)}></div></div><div class="col-12 col-lg-4"><div class="guide p-4" style="${ssrRenderStyle({ "background-color": "#065f46 !important" })}"><h1>`);
@@ -224,4 +226,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-JdTljkzm.mjs.map
+//# sourceMappingURL=index-CLlj8pU_.mjs.map

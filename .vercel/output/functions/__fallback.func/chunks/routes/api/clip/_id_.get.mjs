@@ -9,6 +9,7 @@ import 'node:crypto';
 import 'vue';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
 const _id__get = defineEventHandler(async (event) => {
   const { id } = getRouterParams(event);

@@ -1,14 +1,14 @@
-import { _ as __nuxt_component_0, a as _imports_0, f as formatTime, c as formatViews, b as __nuxt_component_3 } from './virtual_public-DdRKDafC.mjs';
-import { c as useRoute, g as createError, u as useSeoMeta, b as useHead, h as __nuxt_component_1$1, _ as __nuxt_component_2$1, f as fetchDefaults, d as useAsyncData, e as useRequestFetch } from './server.mjs';
-import { defineComponent, ref, useTemplateRef, withAsyncContext, watch, computed, mergeProps, withCtx, createVNode, unref, toDisplayString, toValue, reactive, useSSRContext } from 'vue';
+import { _ as __nuxt_component_0, a as _imports_0, f as formatTime, b as formatViews, c as __nuxt_component_1 } from './_virtual_public-C4Ylx_gc.mjs';
+import { u as useRoute, a as useFetch, c as createError, b as useSeoMeta, d as useHead, _ as __nuxt_component_1$1, e as __nuxt_component_0$1 } from './server.mjs';
+import { defineComponent, ref, useTemplateRef, withAsyncContext, watch, computed, mergeProps, withCtx, createVNode, unref, toDisplayString, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrRenderStyle, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderList } from 'vue/server-renderer';
 import { useInfiniteScroll, watchDebounced, useTimeAgo } from '@vueuse/core';
-import { S as SITE, G as SEO, H as hash, R as RESOURCES } from '../nitro/nitro.mjs';
-import { isPlainObject } from '@vue/shared';
+import { S as SITE, I as SEO, R as RESOURCES } from '../nitro/nitro.mjs';
 import 'vue-router';
+import 'perfect-debounce';
+import '@vue/shared';
 import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
-import 'perfect-debounce';
 import '../routes/renderer.mjs';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
@@ -24,99 +24,8 @@ import 'node:path';
 import 'node:crypto';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
-function useFetch(request, arg1, arg2) {
-  const [opts = {}, autoKey] = typeof arg1 === "string" ? [{}, arg1] : [arg1, arg2];
-  const _request = computed(() => toValue(request));
-  const key = computed(() => toValue(opts.key) || "$f" + hash([autoKey, typeof _request.value === "string" ? _request.value : "", ...generateOptionSegments(opts)]));
-  if (!opts.baseURL && typeof _request.value === "string" && (_request.value[0] === "/" && _request.value[1] === "/")) {
-    throw new Error('[nuxt] [useFetch] the request URL must not start with "//".');
-  }
-  const {
-    server,
-    lazy,
-    default: defaultFn,
-    transform,
-    pick,
-    watch: watchSources,
-    immediate,
-    getCachedData,
-    deep,
-    dedupe,
-    timeout,
-    ...fetchOptions
-  } = opts;
-  const _fetchOptions = reactive({
-    ...fetchDefaults,
-    ...fetchOptions,
-    cache: typeof opts.cache === "boolean" ? void 0 : opts.cache
-  });
-  const _asyncDataOptions = {
-    server,
-    lazy,
-    default: defaultFn,
-    transform,
-    pick,
-    immediate,
-    getCachedData,
-    deep,
-    dedupe,
-    timeout,
-    watch: watchSources === false ? [] : [...watchSources || [], _fetchOptions]
-  };
-  const asyncData = useAsyncData(watchSources === false ? key.value : key, (_, { signal }) => {
-    let _$fetch = opts.$fetch || globalThis.$fetch;
-    if (!opts.$fetch) {
-      const isLocalFetch = typeof _request.value === "string" && _request.value[0] === "/" && (!toValue(opts.baseURL) || toValue(opts.baseURL)[0] === "/");
-      if (isLocalFetch) {
-        _$fetch = useRequestFetch();
-      }
-    }
-    return _$fetch(_request.value, { signal, ..._fetchOptions });
-  }, _asyncDataOptions);
-  return asyncData;
-}
-function generateOptionSegments(opts) {
-  const segments = [
-    toValue(opts.method)?.toUpperCase() || "GET",
-    toValue(opts.baseURL)
-  ];
-  for (const _obj of [opts.query || opts.params]) {
-    const obj = toValue(_obj);
-    if (!obj) {
-      continue;
-    }
-    const unwrapped = {};
-    for (const [key, value] of Object.entries(obj)) {
-      unwrapped[toValue(key)] = toValue(value);
-    }
-    segments.push(unwrapped);
-  }
-  if (opts.body) {
-    const value = toValue(opts.body);
-    if (!value) {
-      segments.push(hash(value));
-    } else if (value instanceof ArrayBuffer) {
-      segments.push(hash(Object.fromEntries([...new Uint8Array(value).entries()].map(([k, v]) => [k, v.toString()]))));
-    } else if (value instanceof FormData) {
-      const obj = {};
-      for (const entry of value.entries()) {
-        const [key, val] = entry;
-        obj[key] = val instanceof File ? val.name : val;
-      }
-      segments.push(hash(obj));
-    } else if (isPlainObject(value)) {
-      segments.push(hash(reactive(value)));
-    } else {
-      try {
-        segments.push(hash(value));
-      } catch {
-        console.warn("[useFetch] Failed to hash body", value);
-      }
-    }
-  }
-  return segments;
-}
 const _sfc_main = /* @__PURE__ */ defineComponent({
   __name: "[channel]",
   __ssrInlineRender: true,
@@ -135,12 +44,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const nextCursor = ref();
     const loading = ref(false);
     const searchQuery = ref("");
-    const { data: response } = ([__temp, __restore] = withAsyncContext(() => useFetch(`/api/channel/${channel}/clips`, {
-      query: {
-        sort: sortBy.value,
-        time: timeBy.value
-      }
-    }, "$xaLXzlOLoc")), __temp = await __temp, __restore(), __temp);
+    const { data: response } = ([__temp, __restore] = withAsyncContext(() => useFetch(
+      `/api/channel/${channel}/clips`,
+      {
+        query: {
+          sort: sortBy.value,
+          time: timeBy.value
+        }
+      },
+      "$UjejtFdFS6"
+      /* nuxt-injected */
+    )), __temp = await __temp, __restore(), __temp);
     if (!response.value) {
       throw createError({
         statusCode: 404,
@@ -223,8 +137,8 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_SearchChannelInput = __nuxt_component_0;
       const _component_NuxtLink = __nuxt_component_1$1;
-      const _component_Icon = __nuxt_component_2$1;
-      const _component_LoadingSpinner = __nuxt_component_3;
+      const _component_Icon = __nuxt_component_0$1;
+      const _component_LoadingSpinner = __nuxt_component_1;
       _push(`<main${ssrRenderAttrs(mergeProps({ class: "text-white" }, _attrs))}><div class="text-center container overflow-hidden"><div class="my-5">`);
       _push(ssrRenderComponent(_component_SearchChannelInput, {
         align: "end",
@@ -332,4 +246,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=_channel_-CakgnROW.mjs.map
+//# sourceMappingURL=_channel_-DMuwZky8.mjs.map

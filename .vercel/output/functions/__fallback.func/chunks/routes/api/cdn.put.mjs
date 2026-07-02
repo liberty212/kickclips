@@ -9,6 +9,7 @@ import 'node:crypto';
 import 'vue';
 import '@iconify/utils';
 import 'consola';
+import 'fast-xml-parser';
 
 const cdn_put = defineEventHandler(async (event) => {
   const { cloudflare } = event.context;

@@ -1,5 +1,5 @@
-import { _ as __nuxt_component_2$1, h as __nuxt_component_1$1, i as useNuxtApp } from './server.mjs';
-import { defineComponent, ref, watch, resolveDirective, unref, mergeProps, withCtx, createVNode, createBlock, createCommentVNode, toDisplayString, openBlock, useSSRContext } from 'vue';
+import { e as __nuxt_component_0$1, _ as __nuxt_component_1$1, g as useNuxtApp } from './server.mjs';
+import { defineComponent, ref, watch, resolveDirective, unref, mergeProps, withCtx, createVNode, toDisplayString, openBlock, createBlock, createCommentVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderClass, ssrRenderAttr, ssrRenderStyle, ssrGetDirectiveProps, ssrRenderComponent, ssrRenderList, ssrInterpolate } from 'vue/server-renderer';
 import { watchDebounced } from '@vueuse/core';
 import { p as publicAssetsURL } from '../nitro/nitro.mjs';
@@ -135,7 +135,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       loading.value = false;
     }, { debounce: 500 });
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Icon = __nuxt_component_2$1;
+      const _component_Icon = __nuxt_component_0$1;
       const _component_NuxtLink = __nuxt_component_1$1;
       const _directive_ripple = resolveDirective("ripple");
       _push(`<form${ssrRenderAttrs(_attrs)}><div class="${ssrRenderClass([`justify-content-md-${__props.align || "center"}`, "d-flex justify-content-center"])}"><div class="d-flex position-relative"><input id="search"${ssrRenderAttr("value", unref(channel))} class="form-control search-input" type="text" placeholder="Search channel clips" style="${ssrRenderStyle({ "max-width": "200px" })}" autocomplete="off"><button${ssrRenderAttrs(mergeProps({
@@ -228,8 +228,8 @@ _sfc_main.setup = (props, ctx) => {
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/LoadingSpinner.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
-const __nuxt_component_3 = Object.assign(_sfc_main, { __name: "LoadingSpinner" });
+const __nuxt_component_1 = Object.assign(_sfc_main, { __name: "LoadingSpinner" });
 const _imports_0 = publicAssetsURL("/kickclips-logo.png");
 
-export { __nuxt_component_0 as _, _imports_0 as a, __nuxt_component_3 as b, formatViews as c, formatTime as f, getDate as g, processClip as p };
-//# sourceMappingURL=virtual_public-DdRKDafC.mjs.map
+export { __nuxt_component_0 as _, _imports_0 as a, formatViews as b, __nuxt_component_1 as c, formatTime as f, getDate as g, processClip as p };
+//# sourceMappingURL=_virtual_public-C4Ylx_gc.mjs.map
