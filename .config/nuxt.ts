@@ -53,12 +53,21 @@ export default defineNuxtConfig({
   },
   nitro: {
   preset: 'vercel',
-  // @ts-expect-error
+  // @ts-expect-error - bundle option exists
   bundle: {
-    external: false
+    external: false   // bundle all dependencies
   },
-  // @ts-expect-error - inline works alongside bundle
-  inline: ['entities']   // force this package to be inlined
+  // @ts-expect-error - valid option
+  externals: {
+    // Force these packages to be inlined (just in case)
+    inline: [
+      'entities',
+      'vue',
+      '@vue/compiler-dom',
+      '@vue/runtime-core',
+      '@vue/runtime-dom'
+    ]
+  }
 },
   sitemap: {
     urls: [

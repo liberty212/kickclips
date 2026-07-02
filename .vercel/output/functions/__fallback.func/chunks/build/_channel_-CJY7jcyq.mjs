@@ -1,16 +1,13 @@
 import { _ as __nuxt_component_0, a as _imports_0, f as formatTime, b as formatViews, c as __nuxt_component_1 } from './_virtual_public-Cn_zw_cu.mjs';
 import { u as useRoute, a as useFetch, c as createError, b as useSeoMeta, d as useHead, _ as __nuxt_component_1$1, e as __nuxt_component_0$1 } from './server.mjs';
-import { defineComponent, ref, useTemplateRef, withAsyncContext, watch, computed, mergeProps, withCtx, createVNode, unref, toDisplayString, useSSRContext } from 'vue';
-import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrRenderStyle, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderList } from 'vue/server-renderer';
 import { useInfiniteScroll, watchDebounced, useTimeAgo } from '@vueuse/core';
-import { S as SITE, I as SEO, R as RESOURCES } from '../nitro/nitro.mjs';
-import 'vue-router';
+import { v as vueExports, S as SITE, K as SEO, R as RESOURCES } from '../nitro/nitro.mjs';
+import { ssrRenderAttrs, ssrRenderComponent, ssrRenderAttr, ssrInterpolate, ssrRenderStyle, ssrIncludeBooleanAttr, ssrLooseContain, ssrLooseEqual, ssrRenderList } from '@vue/server-renderer';
 import 'perfect-debounce';
 import '@vue/shared';
 import '@iconify/vue';
 import '@iconify/utils/lib/css/icon';
 import '../routes/renderer.mjs';
-import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
 import 'devalue';
 import 'unhead/plugins';
@@ -22,11 +19,14 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:crypto';
+import 'estree-walker';
+import 'source-map-js';
+import '@vue/reactivity';
 import '@iconify/utils';
 import 'consola';
 import 'fast-xml-parser';
 
-const _sfc_main = /* @__PURE__ */ defineComponent({
+const _sfc_main = /* @__PURE__ */ vueExports.defineComponent({
   __name: "[channel]",
   __ssrInlineRender: true,
   async setup(__props) {
@@ -34,17 +34,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const { params } = useRoute();
     const { query } = useRoute();
     const { channel } = params;
-    const clips = ref([]);
-    const username = ref("");
-    const userimage = ref("");
+    const clips = vueExports.ref([]);
+    const username = vueExports.ref("");
+    const userimage = vueExports.ref("");
     const { sort, time } = query;
-    useTemplateRef("element");
-    const sortBy = ref(sort || "view");
-    const timeBy = ref(time || "week");
-    const nextCursor = ref();
-    const loading = ref(false);
-    const searchQuery = ref("");
-    const { data: response } = ([__temp, __restore] = withAsyncContext(() => useFetch(
+    vueExports.useTemplateRef("element");
+    const sortBy = vueExports.ref(sort || "view");
+    const timeBy = vueExports.ref(time || "week");
+    const nextCursor = vueExports.ref();
+    const loading = vueExports.ref(false);
+    const searchQuery = vueExports.ref("");
+    const { data: response } = ([__temp, __restore] = vueExports.withAsyncContext(() => useFetch(
       `/api/channel/${channel}/clips`,
       {
         query: {
@@ -90,7 +90,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       nextCursor.value = response2?.nextCursor || null;
       loading.value = false;
     };
-    watch([sortBy, timeBy], async () => {
+    vueExports.watch([sortBy, timeBy], async () => {
       nextCursor.value = null;
       clips.value = [];
       await fetchClips();
@@ -121,7 +121,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         { rel: "canonical", href: seoUrl }
       ]
     });
-    const computedClips = computed(() => {
+    const computedClips = vueExports.computed(() => {
       return clips.value.filter((clip) => {
         const titleMatch = clip.title.toLowerCase().includes(searchQuery.value.toLowerCase());
         const usernameMatch = clip.creator.username.toLowerCase().includes(searchQuery.value.toLowerCase());
@@ -139,19 +139,19 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_NuxtLink = __nuxt_component_1$1;
       const _component_Icon = __nuxt_component_0$1;
       const _component_LoadingSpinner = __nuxt_component_1;
-      _push(`<main${ssrRenderAttrs(mergeProps({ class: "text-white" }, _attrs))}><div class="text-center container overflow-hidden"><div class="my-5">`);
+      _push(`<main${ssrRenderAttrs(vueExports.mergeProps({ class: "text-white" }, _attrs))}><div class="text-center container overflow-hidden"><div class="my-5">`);
       _push(ssrRenderComponent(_component_SearchChannelInput, {
         align: "end",
         class: "mb-4"
       }, null, _parent));
       _push(`<div class="mb-4">`);
       _push(ssrRenderComponent(_component_NuxtLink, { to: "/" }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
             _push2(`<img class="logo"${ssrRenderAttr("src", _imports_0)}${_scopeId}>`);
           } else {
             return [
-              createVNode("img", {
+              vueExports.createVNode("img", {
                 class: "logo",
                 src: _imports_0
               })
@@ -162,17 +162,17 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       }, _parent));
       _push(`</div><div class="d-flex justify-content-center align-items-center mb-2">`);
       _push(ssrRenderComponent(_component_NuxtLink, {
-        to: `https://kick.com/${unref(channel)}`,
+        to: `https://kick.com/${vueExports.unref(channel)}`,
         target: "_blank",
         external: ""
       }, {
-        default: withCtx((_, _push2, _parent2, _scopeId) => {
+        default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<img${ssrRenderAttr("src", unref(userimage) || "/user-default-pic.png")} class="rounded-circle" width="60" height="60"${_scopeId}>`);
+            _push2(`<img${ssrRenderAttr("src", vueExports.unref(userimage) || "/user-default-pic.png")} class="rounded-circle" width="60" height="60"${_scopeId}>`);
           } else {
             return [
-              createVNode("img", {
-                src: unref(userimage) || "/user-default-pic.png",
+              vueExports.createVNode("img", {
+                src: vueExports.unref(userimage) || "/user-default-pic.png",
                 class: "rounded-circle",
                 width: "60",
                 height: "60"
@@ -182,39 +182,39 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         }),
         _: 1
       }, _parent));
-      _push(`</div><h3 class="mb-4">${ssrInterpolate(unref(username) || unref(channel))} Clips</h3><div class="d-flex flex-wrap justify-content-center gap-1 mb-4"><div class="d-flex flex-column align-items-center justify-content-center"><label>Sort by:</label><select class="form-select me-2" style="${ssrRenderStyle({ "max-width": "150px" })}"><option value="view"${ssrIncludeBooleanAttr(Array.isArray(unref(sortBy)) ? ssrLooseContain(unref(sortBy), "view") : ssrLooseEqual(unref(sortBy), "view")) ? " selected" : ""}>Most Viewed</option><option value="date"${ssrIncludeBooleanAttr(Array.isArray(unref(sortBy)) ? ssrLooseContain(unref(sortBy), "date") : ssrLooseEqual(unref(sortBy), "date")) ? " selected" : ""}>Latest</option></select></div><div class="d-flex flex-column align-items-center justify-content-center"><label>Filter by:</label><select class="form-select" style="${ssrRenderStyle({ "max-width": "150px" })}"><option value="all"${ssrIncludeBooleanAttr(Array.isArray(unref(timeBy)) ? ssrLooseContain(unref(timeBy), "all") : ssrLooseEqual(unref(timeBy), "all")) ? " selected" : ""}>All Time</option><option value="month"${ssrIncludeBooleanAttr(Array.isArray(unref(timeBy)) ? ssrLooseContain(unref(timeBy), "month") : ssrLooseEqual(unref(timeBy), "month")) ? " selected" : ""}>Last Month</option><option value="week"${ssrIncludeBooleanAttr(Array.isArray(unref(timeBy)) ? ssrLooseContain(unref(timeBy), "week") : ssrLooseEqual(unref(timeBy), "week")) ? " selected" : ""}>Last Week</option><option value="day"${ssrIncludeBooleanAttr(Array.isArray(unref(timeBy)) ? ssrLooseContain(unref(timeBy), "day") : ssrLooseEqual(unref(timeBy), "day")) ? " selected" : ""}>Last Day</option></select></div><div class="d-flex flex-column align-items-center justify-content-center" style="${ssrRenderStyle({ "width": "240px" })}"><label>Search</label><input${ssrRenderAttr("value", unref(searchQuery))} type="text" class="form-control" placeholder="Search by title or username..."></div></div><div class="row g-4"><!--[-->`);
-      ssrRenderList(unref(computedClips), (clip) => {
+      _push(`</div><h3 class="mb-4">${ssrInterpolate(vueExports.unref(username) || vueExports.unref(channel))} Clips</h3><div class="d-flex flex-wrap justify-content-center gap-1 mb-4"><div class="d-flex flex-column align-items-center justify-content-center"><label>Sort by:</label><select class="form-select me-2" style="${ssrRenderStyle({ "max-width": "150px" })}"><option value="view"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(sortBy)) ? ssrLooseContain(vueExports.unref(sortBy), "view") : ssrLooseEqual(vueExports.unref(sortBy), "view")) ? " selected" : ""}>Most Viewed</option><option value="date"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(sortBy)) ? ssrLooseContain(vueExports.unref(sortBy), "date") : ssrLooseEqual(vueExports.unref(sortBy), "date")) ? " selected" : ""}>Latest</option></select></div><div class="d-flex flex-column align-items-center justify-content-center"><label>Filter by:</label><select class="form-select" style="${ssrRenderStyle({ "max-width": "150px" })}"><option value="all"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(timeBy)) ? ssrLooseContain(vueExports.unref(timeBy), "all") : ssrLooseEqual(vueExports.unref(timeBy), "all")) ? " selected" : ""}>All Time</option><option value="month"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(timeBy)) ? ssrLooseContain(vueExports.unref(timeBy), "month") : ssrLooseEqual(vueExports.unref(timeBy), "month")) ? " selected" : ""}>Last Month</option><option value="week"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(timeBy)) ? ssrLooseContain(vueExports.unref(timeBy), "week") : ssrLooseEqual(vueExports.unref(timeBy), "week")) ? " selected" : ""}>Last Week</option><option value="day"${ssrIncludeBooleanAttr(Array.isArray(vueExports.unref(timeBy)) ? ssrLooseContain(vueExports.unref(timeBy), "day") : ssrLooseEqual(vueExports.unref(timeBy), "day")) ? " selected" : ""}>Last Day</option></select></div><div class="d-flex flex-column align-items-center justify-content-center" style="${ssrRenderStyle({ "width": "240px" })}"><label>Search</label><input${ssrRenderAttr("value", vueExports.unref(searchQuery))} type="text" class="form-control" placeholder="Search by title or username..."></div></div><div class="row g-4"><!--[-->`);
+      ssrRenderList(vueExports.unref(computedClips), (clip) => {
         _push(`<div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3"${ssrRenderAttr("title", clip?.title?.trim() || "")}>`);
         _push(ssrRenderComponent(_component_NuxtLink, {
           to: `/?channel=${clip.channel.slug}&id=${clip.id}`,
           class: "text-decoration-none text-white"
         }, {
-          default: withCtx((_, _push2, _parent2, _scopeId) => {
+          default: vueExports.withCtx((_, _push2, _parent2, _scopeId) => {
             if (_push2) {
-              _push2(`<div class="card bg-dark text-white rounded-1 overflow-hidden"${_scopeId}><div class="position-relative"${_scopeId}><img${ssrRenderAttr("src", clip.thumbnail_url)} class="w-100"${_scopeId}><span class="badge bg-black position-absolute top-0 start-0 m-2 opacity-75"${_scopeId}>${ssrInterpolate(("formatTime" in _ctx ? _ctx.formatTime : unref(formatTime))(clip.duration))}</span><span class="badge bg-black position-absolute bottom-0 start-0 m-2 opacity-75"${_scopeId}>${ssrInterpolate(("formatViews" in _ctx ? _ctx.formatViews : unref(formatViews))(clip.view_count))} views </span></div><div class="card-body text-start d-flex flex-column gap-1 p-2"${_scopeId}><h6 class="card-title m-0 fw-bold text-truncate"${_scopeId}>${ssrInterpolate(clip?.title?.trim() || "")}</h6><small class="d-block card-text text-muted text-truncate"${_scopeId}>${ssrInterpolate(clip?.category?.name?.trim() || "")}</small><small class="d-block card-text text-muted text-truncate"${ssrRenderAttr("title", new Date(clip.created_at).toLocaleString())}${_scopeId}>${ssrInterpolate(unref(useTimeAgo)(clip.created_at))}</small><small class="d-flex card-text text-muted justify-content-start align-items-center gap-1"${_scopeId}>`);
+              _push2(`<div class="card bg-dark text-white rounded-1 overflow-hidden"${_scopeId}><div class="position-relative"${_scopeId}><img${ssrRenderAttr("src", clip.thumbnail_url)} class="w-100"${_scopeId}><span class="badge bg-black position-absolute top-0 start-0 m-2 opacity-75"${_scopeId}>${ssrInterpolate(("formatTime" in _ctx ? _ctx.formatTime : vueExports.unref(formatTime))(clip.duration))}</span><span class="badge bg-black position-absolute bottom-0 start-0 m-2 opacity-75"${_scopeId}>${ssrInterpolate(("formatViews" in _ctx ? _ctx.formatViews : vueExports.unref(formatViews))(clip.view_count))} views </span></div><div class="card-body text-start d-flex flex-column gap-1 p-2"${_scopeId}><h6 class="card-title m-0 fw-bold text-truncate"${_scopeId}>${ssrInterpolate(clip?.title?.trim() || "")}</h6><small class="d-block card-text text-muted text-truncate"${_scopeId}>${ssrInterpolate(clip?.category?.name?.trim() || "")}</small><small class="d-block card-text text-muted text-truncate"${ssrRenderAttr("title", new Date(clip.created_at).toLocaleString())}${_scopeId}>${ssrInterpolate(vueExports.unref(useTimeAgo)(clip.created_at))}</small><small class="d-flex card-text text-muted justify-content-start align-items-center gap-1"${_scopeId}>`);
               _push2(ssrRenderComponent(_component_Icon, { name: "ph:user-bold" }, null, _parent2, _scopeId));
               _push2(`<span class="text-truncate"${_scopeId}>${ssrInterpolate(clip?.creator?.username?.trim() || "")}</span></small></div></div>`);
             } else {
               return [
-                createVNode("div", { class: "card bg-dark text-white rounded-1 overflow-hidden" }, [
-                  createVNode("div", { class: "position-relative" }, [
-                    createVNode("img", {
+                vueExports.createVNode("div", { class: "card bg-dark text-white rounded-1 overflow-hidden" }, [
+                  vueExports.createVNode("div", { class: "position-relative" }, [
+                    vueExports.createVNode("img", {
                       src: clip.thumbnail_url,
                       class: "w-100"
                     }, null, 8, ["src"]),
-                    createVNode("span", { class: "badge bg-black position-absolute top-0 start-0 m-2 opacity-75" }, toDisplayString(("formatTime" in _ctx ? _ctx.formatTime : unref(formatTime))(clip.duration)), 1),
-                    createVNode("span", { class: "badge bg-black position-absolute bottom-0 start-0 m-2 opacity-75" }, toDisplayString(("formatViews" in _ctx ? _ctx.formatViews : unref(formatViews))(clip.view_count)) + " views ", 1)
+                    vueExports.createVNode("span", { class: "badge bg-black position-absolute top-0 start-0 m-2 opacity-75" }, vueExports.toDisplayString(("formatTime" in _ctx ? _ctx.formatTime : vueExports.unref(formatTime))(clip.duration)), 1),
+                    vueExports.createVNode("span", { class: "badge bg-black position-absolute bottom-0 start-0 m-2 opacity-75" }, vueExports.toDisplayString(("formatViews" in _ctx ? _ctx.formatViews : vueExports.unref(formatViews))(clip.view_count)) + " views ", 1)
                   ]),
-                  createVNode("div", { class: "card-body text-start d-flex flex-column gap-1 p-2" }, [
-                    createVNode("h6", { class: "card-title m-0 fw-bold text-truncate" }, toDisplayString(clip?.title?.trim() || ""), 1),
-                    createVNode("small", { class: "d-block card-text text-muted text-truncate" }, toDisplayString(clip?.category?.name?.trim() || ""), 1),
-                    createVNode("small", {
+                  vueExports.createVNode("div", { class: "card-body text-start d-flex flex-column gap-1 p-2" }, [
+                    vueExports.createVNode("h6", { class: "card-title m-0 fw-bold text-truncate" }, vueExports.toDisplayString(clip?.title?.trim() || ""), 1),
+                    vueExports.createVNode("small", { class: "d-block card-text text-muted text-truncate" }, vueExports.toDisplayString(clip?.category?.name?.trim() || ""), 1),
+                    vueExports.createVNode("small", {
                       class: "d-block card-text text-muted text-truncate",
                       title: new Date(clip.created_at).toLocaleString()
-                    }, toDisplayString(unref(useTimeAgo)(clip.created_at)), 9, ["title"]),
-                    createVNode("small", { class: "d-flex card-text text-muted justify-content-start align-items-center gap-1" }, [
-                      createVNode(_component_Icon, { name: "ph:user-bold" }),
-                      createVNode("span", { class: "text-truncate" }, toDisplayString(clip?.creator?.username?.trim() || ""), 1)
+                    }, vueExports.toDisplayString(vueExports.unref(useTimeAgo)(clip.created_at)), 9, ["title"]),
+                    vueExports.createVNode("small", { class: "d-flex card-text text-muted justify-content-start align-items-center gap-1" }, [
+                      vueExports.createVNode(_component_Icon, { name: "ph:user-bold" }),
+                      vueExports.createVNode("span", { class: "text-truncate" }, vueExports.toDisplayString(clip?.creator?.username?.trim() || ""), 1)
                     ])
                   ])
                 ])
@@ -226,7 +226,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
         _push(`</div>`);
       });
       _push(`<!--]--></div>`);
-      if (unref(loading)) {
+      if (vueExports.unref(loading)) {
         _push(ssrRenderComponent(_component_LoadingSpinner, {
           class: "mt-4",
           text: "Loading..."
@@ -240,7 +240,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
-  const ssrContext = useSSRContext();
+  const ssrContext = vueExports.useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("pages/[channel].vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
