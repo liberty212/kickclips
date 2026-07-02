@@ -42,7 +42,6 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@nuxt/icon",
     "@nuxtjs/sitemap",
-    "@nuxthub/core",
     "nuxt-ripple"
   ],
   runtimeConfig: {
@@ -53,9 +52,7 @@ export default defineNuxtConfig({
     url: SITE.url
   },
   nitro: {
-    prerender: {
-      routes: ["/sitemap.xml"]
-    }
+    preset: 'vercel'   // or 'vercel-edge'
   },
   sitemap: {
     urls: [
@@ -94,7 +91,4 @@ export default defineNuxtConfig({
   experimental: {
     typedPages: true
   },
-  hub: {
-    workers: true
-  }
 });
