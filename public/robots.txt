@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://kickclips.ahmedrangel.com/sitemap.xml
+Sitemap: https://www.grabkickclips.com/sitemap.xml
